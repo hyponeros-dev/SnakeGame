@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/map.css">
+  <link rel="stylesheet" href="css/scoring.css">
+  <link rel="stylesheet" href="css/modal.css">
   <meta name="description" content="">
 
   <meta property="og:title" content="">
@@ -24,9 +27,20 @@
 
 <body>
 
+  <div class="modal">
+    <h3>Your dead</h3>
+    <button class="reset-button">Reset</button>
+  </div>
+
   <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <h1>Snake game</h1>
+  <div class="scoring">Scoring : </div>
+  <canvas class="map" width="500" height="500"></canvas>
+
   <script src="js/app.js"></script>
+  <script src="js/snake.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/item.js"></script>
 
 </body>
 

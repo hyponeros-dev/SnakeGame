@@ -1,0 +1,13 @@
+.modal {
+  background-color: #b3d4fc;
+  padding: 3rem;
+  border-radius: 1rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 15%;
+  right: 50%;
+  transform: translate(50%, 50%);
+}

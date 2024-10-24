@@ -1,45 +1,51 @@
 let snake = [
-  { x: 250, y: 250 },
-  { x: 260, y: 250 },
-  { x: 270, y: 250 },
-  { x: 280, y: 250 },
-  { x: 290, y: 250 },
-  { x: 300, y: 250 },
-  { x: 310, y: 250 },
-  { x: 320, y: 250 },
-  { x: 330, y: 250 },
-  { x: 340, y: 250 },
-  { x: 350, y: 250 }
-]
+  { x: 240, y: 240 },
+  { x: 260, y: 240 },
+];
 
-let dx = -10;
+let dx = -20;
 let dy = 0;
+
 function drawSnake(ctx, snake) {
   ctx.clearRect(0, 0, map.width, map.height);
 
-  ctx.fillStyle = 'red';
-  ctx.fillRect(snake[0].x, snake[0].y, 10, 10);
+  // Parcourir chaque segment du serpent
+  for (let i = 0; i < snake.length; i++) {
+    const segment = snake[i];
 
-  ctx.fillStyle = 'green';
-  for (let i = 1; i < snake.length - 1; i++) {
-    ctx.fillRect(snake[i].x, snake[i].y, 10, 10)
+    // Créer un dégradé linéaire dynamique pour chaque segment
+    let gradient = ctx.createLinearGradient(
+      segment.x,
+      segment.y,
+      segment.x + 20,
+      segment.y + 20
+    );
+
+    // Calculer la position du dégradé en fonction de l'indice du segment
+    let colorStop = i / (snake.length - 1); // Proportion de la couleur le long du serpent
+
+    // Ajouter les couleurs au dégradé (du blanc au vert "#59FF00")
+    gradient.addColorStop(0, "white");
+    gradient.addColorStop(1, `rgba(89, 255, 0, ${1 - colorStop})`); // Couleur plus intense vers la queue
+
+    // Appliquer le dégradé pour chaque segment du serpent
+    ctx.fillStyle = gradient;
+    ctx.fillRect(segment.x, segment.y, 20, 20);
   }
-  // si le 3eme param est true augmenter la taille du serpent
-
-  ctx.fillStyle = 'blue';
-  ctx.fillRect(snake[snake.length - 1].x, snake[snake.length - 1].y, 10, 10)
 }
 
 function growSnake() {
   const bodyEnd = snake[snake.length - 1];
   snake.push({
-    x: bodyEnd.x, y: bodyEnd.y
-  })
+    x: bodyEnd.x,
+    y: bodyEnd.y,
+  });
 }
 
 function moveSnake() {
   const newHead = {
-    x: snake[0].x + dx, y: snake[0].y + dy
+    x: snake[0].x + dx,
+    y: snake[0].y + dy,
   };
 
   snake.unshift(newHead);
@@ -51,33 +57,33 @@ document.addEventListener("keydown", (ev) => {
     case "ArrowDown":
       if (dy === 0) {
         dx = 0;
-        dy = 10;
+        dy = 20;
       }
       break;
     case "ArrowUp":
       if (dy === 0) {
         dx = 0;
-        dy = -10;
+        dy = -20;
       }
       break;
     case "ArrowRight":
       if (dx === 0) {
-        dx = 10;
+        dx = 20;
         dy = 0;
       }
       break;
     case "ArrowLeft":
       if (dx === 0) {
-        dx = -10;
+        dx = -20;
         dy = 0;
       }
       break;
-    default :
+    default:
       if (dy !== 0 || dx !== 0) {
         // todo wrong song
       }
   }
-})
+});
 
 function selfCollision() {
   for (let i = 1; i < snake.length; i++) {

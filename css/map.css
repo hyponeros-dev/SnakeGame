@@ -8,6 +8,8 @@ body {
 /* #74B27B #FACF55 #E96950 #FDF6EF */
 
 .map {
-  border: 5px solid #E96950;
-  background-color: #FACF55
+  border: 5px solid #e96950;
+  /* background-color: #FACF55 */
+  background-image: url("../img/herbe_1.avif");
+  background: cover no-repeat;
 }

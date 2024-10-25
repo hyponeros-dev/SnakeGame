@@ -1,16 +1,41 @@
+.press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.3rem;
+  color: #664324;
+}
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  /* background-image: url("../img/lune.jpg"); */
+  background-image: url("../img/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  position: relative;
+}
+
+.logo-title::before {
+  content: "";
+  position: absolute;
+  background-image: url("../img/Snake-du-temple-maudit.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 15rem;
+  height: 15rem;
+  /* vertical-align: middle; */
+  top: 3.5%;
+  left: 50%; /* Centre l'élément horizontalement */
+  transform: translateX(-50%); /* Ajuste pour centrer parfaitement */
 }
 
 /* #74B27B #FACF55 #E96950 #FDF6EF */
 
 .map {
-  border: 5px solid #e96950;
-  /* background-color: #FACF55 */
+  border: 16px solid #ffb915;
   background-image: url("../img/texture_sol_2.jpg");
   background-size: cover;
 }

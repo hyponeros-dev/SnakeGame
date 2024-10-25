@@ -1,6 +1,3 @@
-// Augmenter la taille de chaque unité du quadrillage (serpent et item)
-const GRID_SIZE = 20;
-
 let item = {
   x: 0,
   y: 0,

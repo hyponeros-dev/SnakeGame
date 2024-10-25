@@ -1,13 +1,74 @@
 .modal {
-  background-color: #b3d4fc;
-  padding: 3rem;
-  border-radius: 1rem;
+  background-image: url("../img/T_mort_sans_fond.png");
+  padding-block-start: 5rem;
+  padding-block-end: 5rem;
+  padding-inline: 3rem;
   display: none;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   position: absolute;
-  top: 15%;
-  right: 50%;
-  transform: translate(50%, 50%);
+  /* top: 14%; */
+  top: 56%;
+  left: 50%;
+  /* transform: translateX(-50%); */
+  transform: translate(-50%, -50%);
+}
+
+.reset-button {
+  margin-block-start: 1rem;
+  color: black;
+  text-transform: capitalize;
+  background-color: transparent;
+  border: none;
+  border-radius: 1rem;
+  padding-block-start: 0.5rem;
+  padding-block-end: 0.5rem;
+  padding-inline: 1rem;
+  text-shadow: 1px 4px 4px #00000050;
+}
+.cancel-button {
+  margin-block-start: 1rem;
+  text-transform: capitalize;
+  background-color: transparent;
+  border: none;
+  border-radius: 1rem;
+  padding-block-start: 0.5rem;
+  padding-block-end: 0.5rem;
+  padding-inline: 1rem;
+  text-shadow: 1px 4px 4px #6c462350;
+}
+
+p {
+  margin: 0;
+}
+.score-table-title,
+.score-table {
+  text-align: center;
+}
+
+.score-table-title {
+  margin-block-start: 2rem;
+  margin-block-end: 0.5rem;
+}
+label {
+  margin-block-start: 2rem;
+}
+label,
+input {
+  padding-inline-start: 1rem;
+}
+input {
+  margin-block-start: 1rem;
+  margin-inline-start: 1rem;
+  background-color: #ffe0aa;
+  border: 1px solid #000000;
+  width: auto;
+  height: 3rem;
+  box-shadow: 0px 4px 4px 6px #00000025;
+}
+
+input::placeholder {
+  color: #6c4623;
+  font-size: 1.5rem;
+  opacity: 100;
 }

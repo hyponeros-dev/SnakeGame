@@ -3,22 +3,28 @@ let snake = [
   { x: 260, y: 240 },
 ];
 
-let dx = -20;
+// Augmenter la taille de chaque unité du quadrillage (serpent et item)
+const GRID_SIZE = 20;
+
+let dx = -GRID_SIZE;
 let dy = 0;
 
 function drawSnake(ctx, snake) {
   ctx.clearRect(0, 0, map.width, map.height);
 
-  // Parcourir chaque segment du serpent
-  for (let i = 0; i < snake.length; i++) {
+  // Dessiner la tête du serpent (premier segment) avec des yeux orientés selon la direction
+  drawSnakeHead(ctx, snake[0]);
+
+  // Parcourir chaque segment du serpent sauf la tête pour dessiner le corps
+  for (let i = 1; i < snake.length; i++) {
     const segment = snake[i];
 
     // Créer un dégradé linéaire dynamique pour chaque segment
     let gradient = ctx.createLinearGradient(
       segment.x,
       segment.y,
-      segment.x + 20,
-      segment.y + 20
+      segment.x + GRID_SIZE,
+      segment.y + GRID_SIZE
     );
 
     // Calculer la position du dégradé en fonction de l'indice du segment
@@ -30,10 +36,48 @@ function drawSnake(ctx, snake) {
 
     // Appliquer le dégradé pour chaque segment du serpent
     ctx.fillStyle = gradient;
-    ctx.fillRect(segment.x, segment.y, 20, 20);
+    ctx.fillRect(segment.x, segment.y, GRID_SIZE, GRID_SIZE);
   }
 }
 
+// Fonction pour dessiner la tête du serpent avec des yeux orientés
+function drawSnakeHead(ctx, head) {
+  ctx.fillStyle = "white";
+  ctx.beginPath();
+  ctx.arc(head.x + 10, head.y + 10, 10, 0, Math.PI * 2); // Tête circulaire
+  ctx.fill();
+  ctx.closePath();
+
+  // Dessiner les yeux selon la direction du serpent
+  ctx.fillStyle = "black";
+  if (dx === GRID_SIZE) {
+    // Tête vers la droite
+    drawEye(ctx, head.x + 14, head.y + 7); // Oeil droit
+    drawEye(ctx, head.x + 14, head.y + 13); // Oeil gauche
+  } else if (dx === -GRID_SIZE) {
+    // Tête vers la gauche
+    drawEye(ctx, head.x + 6, head.y + 7); // Oeil droit
+    drawEye(ctx, head.x + 6, head.y + 13); // Oeil gauche
+  } else if (dy === GRID_SIZE) {
+    // Tête vers le bas
+    drawEye(ctx, head.x + 7, head.y + 14); // Oeil droit
+    drawEye(ctx, head.x + 13, head.y + 14); // Oeil gauche
+  } else if (dy === -GRID_SIZE) {
+    // Tête vers le haut
+    drawEye(ctx, head.x + 7, head.y + 6); // Oeil droit
+    drawEye(ctx, head.x + 13, head.y + 6); // Oeil gauche
+  }
+}
+
+// Fonction utilitaire pour dessiner un œil
+function drawEye(ctx, x, y) {
+  ctx.beginPath();
+  ctx.arc(x, y, 2, 0, Math.PI * 2); // Cercle de l'œil
+  ctx.fill();
+  ctx.closePath();
+}
+
+// Fonction pour faire grandir le serpent
 function growSnake() {
   const bodyEnd = snake[snake.length - 1];
   snake.push({
@@ -42,6 +86,7 @@ function growSnake() {
   });
 }
 
+// Fonction pour déplacer le serpent
 function moveSnake() {
   const newHead = {
     x: snake[0].x + dx,
@@ -52,29 +97,30 @@ function moveSnake() {
   snake.pop();
 }
 
+// Écoute des événements de touches pour changer la direction du serpent
 document.addEventListener("keydown", (ev) => {
   switch (ev.key) {
     case "ArrowDown":
       if (dy === 0) {
         dx = 0;
-        dy = 20;
+        dy = GRID_SIZE;
       }
       break;
     case "ArrowUp":
       if (dy === 0) {
         dx = 0;
-        dy = -20;
+        dy = -GRID_SIZE;
       }
       break;
     case "ArrowRight":
       if (dx === 0) {
-        dx = 20;
+        dx = GRID_SIZE;
         dy = 0;
       }
       break;
     case "ArrowLeft":
       if (dx === 0) {
-        dx = -20;
+        dx = -GRID_SIZE;
         dy = 0;
       }
       break;
@@ -85,6 +131,7 @@ document.addEventListener("keydown", (ev) => {
   }
 });
 
+// Fonction pour vérifier la collision avec soi-même
 function selfCollision() {
   for (let i = 1; i < snake.length; i++) {
     if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {

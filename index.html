@@ -11,6 +11,10 @@
   <link rel="stylesheet" href="css/modal.css">
   <meta name="description" content="">
 
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  </style>
+
   <meta property="og:title" content="">
   <meta property="og:type" content="">
   <meta property="og:url" content="">
@@ -28,14 +32,31 @@
 <body>
 
   <div class="modal">
-    <h3>Your dead</h3>
-    <button class="reset-button">Reset</button>
+    <img src="img/title_table.png" alt="">
+    <p class="score-table-title press-start-2p-regular">Votre score :</p>
+    <p class="score-table press-start-2p-regular">1 256 369 000</p>
+
+    <label class="press-start-2p-regular" for="pseudo">Saisi un pseudo</label>
+    <input id="pseudo" class="press-start-2p-regular" type="text" placeholder="TQA">
+
+    <button class="reset-button press-start-2p-regular">Enregistrer</button>
+    <button class="cancel-button press-start-2p-regular">Passer</button>
   </div>
 
   <!-- Add your site or application content here -->
-  <h1>Snake game</h1>
-  <div class="scoring">Scoring : </div>
+  <h1 class="logo-title"></h1>
   <canvas class="map" width="500" height="500"></canvas>
+
+  <audio id="background-music" loop>
+    <source src="audio/Indiana_Jones_Theme-C64 SID.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Icône mute / unmute -->
+  <div id="music-toggle" style="position: absolute; top: 20px; right: 20px; cursor: pointer;">
+    <img id="mute-icon" src="img/unmute.png" alt="Play Music" width="40" height="40">
+  </div>
+
 
   <script src="js/app.js"></script>
   <script src="js/snake.js"></script>
